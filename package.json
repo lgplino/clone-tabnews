@@ -4,7 +4,10 @@
   "description": "Um projeto para aprender de fora a fora fazer um bom projeto do zero.",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run sv:up && next dev",
+    "sv:up": "docker compose -f infra/compose.yaml up -d",
+    "sv:down": "docker compose -f infra/compose.yaml down",
+    "sv:stop": "docker compose -f infra/compose.yaml stop",
     "lint-check": "prettier --check .",
     "lint-fix": "prettier --write .",
     "test": "jest",
