@@ -4,7 +4,7 @@
   "description": "Um projeto para aprender de fora a fora fazer um bom projeto do zero.",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run sv:up && next dev",
+    "dev": "npm run sv:up && npm run wait-for-postgres && npm run migration:up && next dev",
     "sv:up": "docker compose -f infra/compose.yaml up -d",
     "sv:down": "docker compose -f infra/compose.yaml down",
     "sv:stop": "docker compose -f infra/compose.yaml stop",
@@ -13,7 +13,8 @@
     "test": "jest --runInBand",
     "test:watch": "jest --watchAll --runInBand",
     "migration:create": "node-pg-migrate -m infra/migrations create",
-    "migration:up": "node-pg-migrate -m infra/migrations --envPath .env.development up"
+    "migration:up": "node-pg-migrate -m infra/migrations --envPath .env.development up",
+    "wait-for-postgres": "node infra/scripts/wait-for-postgres.js"
   },
   "author": "",
   "license": "MIT",
